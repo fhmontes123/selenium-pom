@@ -5,13 +5,17 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+
 public class ShadowDomTest {
     private WebDriver driver;
+    private WebDriverWait wait;
 
     private final By NOMBRE_INPUT_TEXT = By.id("txtNombre");
     private final By BTN_VALIDAR_NOMBRE = By.id("btnValidarNombre");
@@ -41,6 +45,8 @@ public class ShadowDomTest {
 
     @Test
     public void validarIngresarApellido(){
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
         WebElement host = driver.findElement(SHADOW_HOST);
         SearchContext shadowRoot = host.getShadowRoot();
 
