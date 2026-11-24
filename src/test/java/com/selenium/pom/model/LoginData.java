@@ -1,6 +1,5 @@
 package com.selenium.pom.model;
 
-// Clase que representa a cada fila del excel
 public class LoginData {
 
     private String username;
@@ -20,5 +19,13 @@ public class LoginData {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -6,17 +6,14 @@ import com.selenium.pom.utils.ExcelReader;
 import com.selenium.pom.utils.JsonReader;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class LoginJsonTest {
 
     private WebDriver driver;
     LoginPage loginPage;
 
-    @BeforeClass
+    @BeforeMethod
     public void setup() {
         loginPage = new LoginPage(driver);
         driver = loginPage.chromeDriverConnection();
@@ -30,15 +27,13 @@ public class LoginJsonTest {
 
     @Test(dataProvider = "loginData")
     public void loginUsuariosJson(LoginData user) {
-        driver = loginPage.chromeDriverConnection();
-        loginPage.visit("https://www.saucedemo.com/");
         loginPage.loginUser(user.getUsername(), user.getPassword());
         Assert.assertEquals(driver.getCurrentUrl(),
                 "https://www.saucedemo.com/inventory.html",
                 "El login fallo para: " + user.getUsername());
     }
 
-    @AfterClass
+    @AfterMethod
     public void tearDown() {
         if(driver != null){
             driver.quit();
