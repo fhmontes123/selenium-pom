@@ -3,8 +3,11 @@ package com.selenium.pom.page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 // CLASE DE CONFIGURACION DEL WEBDRIVER Y FUNCIONES BASICAS REUTILIZABLES PARA TODAS LAS PAGINAS
@@ -19,7 +22,15 @@ public class BasePage {
 
     // Crea y devuelve una instancia de ChromeDriver.
     public WebDriver chromeDriverConnection() {
-        driver = new ChromeDriver();
+        // driver = new ChromeDriver();
+        try{
+            driver = new RemoteWebDriver(
+                    new URL("http://localhost:4444"),
+                    new ChromeOptions()
+            );
+        }catch (MalformedURLException e){
+            throw new RuntimeException(e);
+        }
         return driver;
     }
 

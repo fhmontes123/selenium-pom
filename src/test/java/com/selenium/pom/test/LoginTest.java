@@ -25,6 +25,13 @@ public class LoginTest {
     @Test
     public void loginExitoso() {
         loginPage.loginUser("standard_user", "secret_sauce");
+
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
     }
 
