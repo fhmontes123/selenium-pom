@@ -2,16 +2,19 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Grid Demo" parallel="tests" thread-count="3">
     <test name="Test para login de un usuario">
+        <parameter name="browser" value="chrome"></parameter>
         <classes>
             <class name="com.selenium.pom.test.LoginTest"></class>
         </classes>
     </test>
     <test name="Test para login con Excel">
+        <parameter name="browser" value="firefox"></parameter>
         <classes>
             <class name="com.selenium.pom.test.LoginExcelTest"></class>
         </classes>
     </test>
     <test name="Test para login con JSON">
+        <parameter name="browser" value="edge"></parameter>
         <classes>
             <class name="com.selenium.pom.test.LoginJsonTest"></class>
         </classes>

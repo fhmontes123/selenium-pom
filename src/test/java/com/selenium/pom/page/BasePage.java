@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
@@ -29,6 +32,34 @@ public class BasePage {
                     new ChromeOptions()
             );
         }catch (MalformedURLException e){
+            throw new RuntimeException(e);
+        }
+        return driver;
+    }
+
+    // Configuracion con multiples navegadores
+    public WebDriver driverConnection(String browser) {
+        try{
+            switch (browser.toLowerCase()) {
+                case "firefox":
+                    driver = new RemoteWebDriver(
+                            new URL("http://localhost:4444"),
+                            new FirefoxOptions()
+                    );
+                    break;
+                case "edge":
+                    driver = new RemoteWebDriver(
+                            new URL("http://localhost:4444"),
+                            new EdgeOptions()
+                    );
+                    break;
+                default:
+                    driver = new RemoteWebDriver(
+                            new URL("http://localhost:4444"),
+                            new ChromeOptions()
+                    );
+            }
+        } catch (Exception e){
             throw new RuntimeException(e);
         }
         return driver;

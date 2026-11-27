@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class LoginTest {
@@ -16,9 +17,11 @@ public class LoginTest {
 
     // Configura el navegador y abre la página antes de ejecutar las pruebas.
     @BeforeClass
-    public void setup() {
+    @Parameters("browser")
+    public void setup(String browser) {
         loginPage = new LoginPage(driver);
-        driver = loginPage.chromeDriverConnection();
+        // driver = loginPage.chromeDriverConnection();
+        driver = loginPage.driverConnection(browser);
         loginPage.visit("https://www.saucedemo.com/");
     }
 

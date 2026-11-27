@@ -13,9 +13,11 @@ public class LoginExcelTest {
     LoginPage loginPage;
 
     @BeforeMethod
-    public void setup() {
+    @Parameters("browser")
+    public void setup(String browser) {
         loginPage = new LoginPage(driver);
-        driver = loginPage.chromeDriverConnection();
+        // driver = loginPage.chromeDriverConnection();
+        driver = loginPage.driverConnection(browser);
         loginPage.visit("https://www.saucedemo.com/");
     }
 
