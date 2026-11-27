@@ -27,6 +27,13 @@ public class LoginExcelTest {
     @Test(dataProvider = "loginData")
     public void loginUsuariosExcel(LoginData user) {
         loginPage.loginUser(user.getUsername(), user.getPassword());
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         Assert.assertEquals(driver.getCurrentUrl(),
                 "https://www.saucedemo.com/inventory.html",
                 "El login fallo para: " + user.getUsername());

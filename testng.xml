@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Grid Demo" parallel="tests" thread-count="3">
+    <test name="Test para login de un usuario">
+        <classes>
+            <class name="com.selenium.pom.test.LoginTest"></class>
+        </classes>
+    </test>
+    <test name="Test para login con Excel">
+        <classes>
+            <class name="com.selenium.pom.test.LoginExcelTest"></class>
+        </classes>
+    </test>
+    <test name="Test para login con JSON">
+        <classes>
+            <class name="com.selenium.pom.test.LoginJsonTest"></class>
+        </classes>
+    </test>
+</suite>
