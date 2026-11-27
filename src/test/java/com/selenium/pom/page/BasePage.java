@@ -11,6 +11,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 // CLASE DE CONFIGURACION DEL WEBDRIVER Y FUNCIONES BASICAS REUTILIZABLES PARA TODAS LAS PAGINAS
@@ -26,12 +27,12 @@ public class BasePage {
     // Crea y devuelve una instancia de ChromeDriver.
     public WebDriver chromeDriverConnection() {
         // driver = new ChromeDriver();
-        try{
+        try {
             driver = new RemoteWebDriver(
                     new URL("http://localhost:4444"),
                     new ChromeOptions()
             );
-        }catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
         return driver;
@@ -39,7 +40,7 @@ public class BasePage {
 
     // Configuracion con multiples navegadores
     public WebDriver driverConnection(String browser) {
-        try{
+        try {
             switch (browser.toLowerCase()) {
                 case "firefox":
                     driver = new RemoteWebDriver(
@@ -59,7 +60,31 @@ public class BasePage {
                             new ChromeOptions()
                     );
             }
-        } catch (Exception e){
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return driver;
+    }
+
+    // Configuracion para LamdaTest (NUBE)
+    public WebDriver driverConnectionCloud() {
+        String username = "yyy";
+        String password = "xxx";
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setPlatformName("Windows 10");
+        chromeOptions.setBrowserVersion("latest");
+
+        HashMap<String, Object> chromeOptionMap = new HashMap<>();
+        chromeOptionMap.put("build", "Mi Primer Build en la Nube");
+        chromeOptionMap.put("name", "Prueba de login con DDT");
+        chromeOptionMap.put("w3c", true);
+        chromeOptions.setCapability("LT:Options", chromeOptionMap);
+
+        String hubURL = "https://" + username + ":" + password + "@hub.lambdatest.com/wd/hub";
+        try {
+            driver = new RemoteWebDriver(new URL(hubURL), chromeOptions);
+        } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
         return driver;

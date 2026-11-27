@@ -17,7 +17,8 @@ public class LoginExcelTest {
     public void setup(String browser) {
         loginPage = new LoginPage(driver);
         // driver = loginPage.chromeDriverConnection();
-        driver = loginPage.driverConnection(browser);
+        // driver = loginPage.driverConnection(browser);
+        driver = loginPage.driverConnectionCloud();
         loginPage.visit("https://www.saucedemo.com/");
     }
 
